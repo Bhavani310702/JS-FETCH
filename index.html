@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let body = document.body;
+      body.style.boxSizing = "border-box";
+      let header = document.createElement("h1");
+      header.innerHTML = "API  FETCH";
+      header.style.textAlign = "center";
+      header.style.margin = "0";
+      header.style.padding = "10px";
+      header.style.backgroundColor = "purple";
+      body.append(header);
+      let main = document.createElement("div");
+      main.style.display = "flex";
+      main.style.flexWrap = "wrap";
+      main.style.gap = "30px";
+      main.style.backgroundColor = "black";
+      main.style.padding = "10px";
+      let data = fetch("https://679bb6bd33d316846324dfe5.mockapi.io/Artists");
+      data
+        .then((x) => x.json())
+        .then((x) => {
+          let op = x;
+          op.map((x) => {
+            let card = document.createElement("div");
+            card.style.border = "none";
+            card.style.boxShadow = "0px 0px 10px white";
+            card.style.width = "270px";
+            card.style.padding = "5px";
+            card.style.backgroundColor = "grey";
+            let image = document.createElement("img");
+            image.src = x.image;
+            image.style.padding = "10pxr";
+            image.style.height = "200px";
+            image.style.width = "270px";
+            let title = document.createElement("h1");
+            title.innerHTML = x.name;
+            title.style.textAlign = "center";
+            let famoussongs = document.createElement("h3");
+            famoussongs.innerHTML = x.famousSongs;
+            famoussongs.style.textAlign = "center";
+            let genre = document.createElement("h3");
+            genre.innerHTML = x.genre;
+            genre.style.textAlign = "center";
+            let biography = document.createElement("p");
+            biography.innerHTML = x.bio;
+            biography.style.textAlign = "center";
+            card.append(
+              image,
+              title,
+              famoussongs,
+              genre,
+              biography
+            );
+            main.append(card);
+            document.body.append(main);
+          });
+        })
+        .catch((x) => {
+          console.log(x);
+        });
+    </script>
+  </body>
+</html>
